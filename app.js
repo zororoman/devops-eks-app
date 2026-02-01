@@ -1,16 +1,17 @@
 const express = require("express");
-const app = express();
+const path = require("path");
 
-// API endpoint to expose build info
-app.get("/build-info", (req, res) => {
-  res.json({
-    buildNumber: process.env.BUILD_NUMBER || "local",
-    environment: "EKS",
-    status: "Deployed Successfully 🚀"
-  });
+const app = express();
+const PORT = 3000;
+
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// Health check
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
 });
 
-const PORT = 3000;
-app.listen(3000, () => {
-  console.log("App running on port 3000");
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}`);
 });
