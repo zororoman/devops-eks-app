@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevSecOps Pipeline</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .status {
+      margin: 20px 0;
+      padding: 12px;
+      border-radius: 10px;
+      background: #16a34a;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.15);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>🚀 DevSecOps Pipeline</h1>
+
+    <div class="status">
+      ✅ Pipeline Running Successfully
+    </div>
+
+    <div class="subtitle">
+      End-to-End CI/CD with Security & Monitoring
+    </div>
+
+    <div class="stack">
+      <div class="badge">GitHub</div>
+      <div class="badge">Jenkins</div>
+      <div class="badge">Docker</div>
+      <div class="badge">AWS ECR</div>
+      <div class="badge">EKS</div>
+      <div class="badge">SonarQube</div>
+      <div class="badge">Trivy</div>
+      <div class="badge">Prometheus</div>
+      <div class="badge">Grafana</div>
+    </div>
+
+    <footer>
+      Built by Ajay Kumar | DevSecOps Project
+    </footer>
+  </div>
+</body>
+</html>
