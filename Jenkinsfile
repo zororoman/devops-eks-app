@@ -10,11 +10,13 @@ pipeline {
     stages {
 
         stage('Checkout Code') {
-            steps {
-                git credentialsId: 'github-creds',
-                    url: 'https://github.com/zororoman/devops-eks-app.git'
-            }
-        }
+    steps {
+        git branch: 'main',
+            credentialsId: 'github-creds',
+            url: 'https://github.com/zororoman/devops-eks-app.git'
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
