@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
 
-app.use(express.static("public"));
-
-app.get("/health", (req, res) => {
-  res.json({ status: "UP" });
+// API endpoint to expose build info
+app.get("/build-info", (req, res) => {
+  res.json({
+    buildNumber: process.env.BUILD_NUMBER || "local",
+    environment: "EKS",
+    status: "Deployed Successfully 🚀"
+  });
 });
 
 const PORT = 3000;
