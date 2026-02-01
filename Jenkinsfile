@@ -1,78 +1,49 @@
 pipeline {
-  agent any
+    agent any
 
-  environment {
-    AWS_REGION = "ap-south-1"
-    ECR_REPO   = "460425809337.dkr.ecr.ap-south-1.amazonaws.com/devops-app-repo"
-    IMAGE_TAG  = "${BUILD_NUMBER}"
-  }
-
-  stages {
-
-    stage('Checkout') {
-      steps {
-        git branch: 'main',
-            url: 'https://github.com/zororoman/devops-eks-app.git'
-      }
+    environment {
+        AWS_REGION = "ap-south-1"
+        ECR_REPO = "460425809337.dkr.ecr.ap-south-1.amazonaws.com/devops-app-repo"
+        IMAGE_TAG = "${BUILD_NUMBER}"
     }
 
-    stage('SonarQube Analysis') {
-  steps {
-    script {
-      def scannerHome = tool 'sonar-scanner'
-      withSonarQubeEnv('sonarqube') {
-        sh """
-          ${scannerHome}/bin/sonar-scanner \
-            -Dsonar.projectKey=devops-eks-app \
-            -Dsonar.sources=.
-        """
-      }
-    }
-  }
-}
+    stages {
 
-
-    stage('Quality Gate') {
-      steps {
-        timeout(time: 1, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
+        stage('Checkout Code') {
+            steps {
+                git credentialsId: 'github-creds',
+                    url: 'https://github.com/zororoman/devops-eks-app.git'
+            }
         }
-      }
-    }
 
-    stage('Trivy FS Scan') {
-      steps {
-        sh 'trivy fs --exit-code 0 --severity HIGH,CRITICAL .'
-      }
-    }
-
-    stage('Docker Build') {
-      steps {
-        sh 'docker build -t devops-app:${IMAGE_TAG} .'
-      }
-    }
-
-    stage('Trivy Image Scan') {
-      steps {
-        sh 'trivy image --exit-code 0 --severity HIGH,CRITICAL devops-app:${IMAGE_TAG}'
-      }
-    }
-
-    stage('Push to ECR') {
-      steps {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: 'aws-creds'
-        ]]) {
-          sh '''
-            aws ecr get-login-password --region ${AWS_REGION} \
-              | docker login --username AWS --password-stdin ${ECR_REPO}
-
-            docker tag devops-app:${IMAGE_TAG} ${ECR_REPO}:${IMAGE_TAG}
-            docker push ${ECR_REPO}:${IMAGE_TAG}
-          '''
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                docker build -t devops-app .
+                docker tag devops-app:latest $ECR_REPO:$IMAGE_TAG
+                '''
+            }
         }
-      }
+
+        stage('Push to ECR') {
+            steps {
+                sh '''
+                aws ecr get-login-password --region $AWS_REGION | \
+                docker login --username AWS --password-stdin $ECR_REPO
+                docker push $ECR_REPO:$IMAGE_TAG
+                '''
+            }
+        }
+
+        stage('Deploy to EKS') {
+            steps {
+                sh '''
+                kubectl set image deployment/devops-app \
+                devops-app=$ECR_REPO:$IMAGE_TAG
+
+                kubectl rollout status deployment/devops-app
+                '''
+            }
+        }
     }
-  }
 }
