@@ -11,6 +11,13 @@ app.get("/", (req, res) => {
 });
 
 const PORT = 3000;
+app.get("/build-info", (req, res) => {
+  res.json({
+    buildNumber: process.env.BUILD_NUMBER || "LOCAL",
+    status: "SUCCESS"
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}`);
 });
