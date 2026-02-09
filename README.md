@@ -1,86 +1,104 @@
-🚀 DevSecOps CI/CD Pipeline on AWS EKS
-📌 Project Overview
+# 🚀 DevSecOps CI/CD Pipeline on AWS EKS
 
-This project demonstrates an end-to-end DevSecOps CI/CD pipeline deployed on AWS EKS.
-It automates application build, security scanning, containerization, and Kubernetes deployment with monitoring.
+## 📌 Project Overview
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/829c2ca8-0db9-4f42-8965-c33f45d6e91c" />
+This project demonstrates a **complete end-to-end DevSecOps CI/CD pipeline** implemented on **AWS EKS**.  
+The pipeline automates **code integration, security scanning, containerization, deployment, and monitoring** of a Node.js application using modern DevOps and cloud-native tools.
 
+The goal of this project is to showcase **real-world DevSecOps practices**, Kubernetes deployment workflows, and AWS infrastructure integration.
 
-🧰 Tools & Technologies Used
+<p align="center">
+  <img width="900" alt="DevSecOps Pipeline Architecture" src="https://github.com/user-attachments/assets/829c2ca8-0db9-4f42-8965-c33f45d6e91c" />
+</p>
 
-Cloud: AWS (EC2, EKS, ECR, ELB, IAM, VPC)
+---
 
-CI/CD: Jenkins
+## 🧰 Tools & Technologies
 
-Containers: Docker
+### ☁️ Cloud & Infrastructure
+- AWS EC2
+- AWS EKS
+- AWS ECR
+- AWS Elastic Load Balancer (ELB)
+- AWS IAM
+- AWS VPC
 
-Orchestration: Kubernetes (kubectl)
+### 🔄 CI/CD & Automation
+- Jenkins
+- Git & GitHub
 
-Security: SonarQube, Trivy
+### 📦 Containers & Orchestration
+- Docker
+- Kubernetes (kubectl)
+- Helm
 
-Monitoring: Prometheus, Grafana
+### 🔐 Security (DevSecOps)
+- SonarQube (Static Code Analysis)
+- Trivy (Container Image Vulnerability Scanning)
 
-Version Control: Git, GitHub
+### 📊 Monitoring & Observability
+- Prometheus
+- Grafana
 
-OS: Linux (Ubuntu)
+### 🧑‍💻 Application Stack
+- Node.js
+- Express.js
+- HTML
+- CSS
+- Linux (Ubuntu)
 
-Package Manager: Helm
+---
 
-Application: Node.js, Express.js, HTML, CSS
+## 🔄 CI/CD Pipeline Workflow
 
-🔄 CI/CD Pipeline Stages
+1. Developer commits code to GitHub  
+2. Jenkins pipeline is triggered automatically  
+3. Source code is analyzed using **SonarQube**  
+4. Docker image is scanned for vulnerabilities using **Trivy**  
+5. Docker image is built and tagged  
+6. Image is pushed to **AWS ECR**  
+7. Application is deployed to **AWS EKS** using Kubernetes manifests  
+8. Application is exposed publicly using **Kubernetes LoadBalancer (ELB)**  
+9. Application and cluster metrics are monitored using **Prometheus & Grafana**
 
-Code commit to GitHub
+---
 
-Jenkins pipeline trigger
+## 📊 Monitoring & Observability
 
-Static code analysis using SonarQube
+- Kubernetes cluster monitoring
+- Node-level and Pod-level metrics
+- Preconfigured Grafana dashboards
+- Prometheus metrics collection using Helm charts
 
-Vulnerability scanning using Trivy
+---
 
-Docker image build and tagging
+## 🚀 Deployment Highlights
 
-Push image to AWS ECR
+- Deployed a containerized Node.js application on **AWS EKS**
+- Exposed application via **AWS Elastic Load Balancer**
+- Secure access using **IAM roles, security groups, and least-privilege policies**
+- Used Helm to deploy Prometheus & Grafana efficiently
 
-Deploy application to AWS EKS
+---
 
-Expose application using Kubernetes LoadBalancer
+## 🧠 Key Learnings
 
-Monitor cluster and application using Prometheus & Grafana
+- Designing and implementing an end-to-end DevSecOps pipeline
+- Integrating security tools into CI/CD workflows
+- Kubernetes service exposure and networking
+- AWS EKS cluster setup and troubleshooting
+- Real-world debugging of CI/CD, Docker, Kubernetes, and AWS issues
+- AWS cost management and resource cleanup best practices
 
-📊 Monitoring
+---
 
-Kubernetes cluster metrics
+## 🧹 Cost Optimization
 
-Node and Pod-level monitoring
+All AWS resources (EKS cluster, EC2 nodes, Load Balancers, ECR images) were **properly deleted after project completion** to avoid unnecessary AWS billing.
 
-Dashboards configured in Grafana
+---
 
+## 👤 Author
 
-🚀 Deployment Highlights
-
-Application deployed on AWS EKS
-
-Exposed publicly via AWS Elastic Load Balancer
-
-Secure access using IAM roles and security groups
-
-🧠 Key Learnings
-
-End-to-end DevSecOps pipeline implementation
-
-Kubernetes service exposure and networking
-
-Secure container image handling
-
-Real-world troubleshooting of CI/CD and cloud infrastructure
-
-AWS cost awareness and cleanup practices
-
-🧹 Cost Optimization
-
-All AWS resources were properly terminated after project completion to avoid unnecessary billing.
-
-👤 Author
-AjayKumar Ramesh
+**AjayKumar Ramesh**  
+DevSecOps | Cloud | Kubernetes | AWS
